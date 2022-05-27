@@ -3,6 +3,7 @@ const { validationResult } = require("express-validator");
 const dotenv = require("dotenv");
 const otpGenerator = require("otp-generator");
 const jwt = require("jsonwebtoken");
+const path = require("path");
 
 dotenv.config();
 
@@ -245,3 +246,56 @@ exports.newpassword = async (req, res, next) => {
       next(err);
   }
 }; 
+
+
+exports.details = async (req, res, next) => {
+  try{
+    if (!validationResult(req).isEmpty())
+    return res.status(422).json('validation failed');
+
+      const {email,income,fees,sourceofincome,bankac,ifsc,bankname,fundingRequired} = req.body;
+      const {image,incomecerti,feeproof} = req.files;
+      let imageUrl,incomecertiurl,feeproofurl;
+      if(image){
+          imageUrl = image[0].path;
+      }
+      if(incomecerti){
+        incomecertiurl = incomecerti[0].path;
+      }
+      if(feeproof){
+        feeproofurl = feeproof[0].path;
+    }
+    if(parseInt(income)>200000)
+      {
+        const error = new Error("Not eligible for funding");
+        error.statusCode = 400;
+        throw error;
+      }
+     
+      if(parseInt(fees)<parseInt(fundingRequired))
+      {
+        const error = new Error("Enter amount less than or equal to fees");
+        error.statusCode = 400;
+        throw error;
+      }
+      const student = await Student.findOne({ email: email });
+      if (student === null){
+          const error = new Error("student is not registered !!");
+          error.statusCode = 400;
+          throw error;
+        }
+        await Student.updateOne({ email: email },
+          { $set: { income:income,fees:fees,sourceofincome:sourceofincome,bankName:bankname,
+            fundingRequired:fundingRequired,ifscCode:ifsc,bankAcNo:bankac,image:imageUrl,
+            incomeCertificate:incomecertiurl,feeProof:feeproofurl} });
+         
+       //   console.log(student)
+          return res.status(200).json('student details added');
+  } 
+  catch (err) {
+      if (!err.statusCode)
+          err.statusCode = 500;
+      next(err);
+  }
+}; 
+

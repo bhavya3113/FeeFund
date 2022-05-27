@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const path = require("path");
 const schema = mongoose.Schema;
 
 const studentSchema = new schema({
@@ -30,29 +31,42 @@ const studentSchema = new schema({
     type: Number,
     require:true
   },
-  sourceofincome:{
+  fees:{
     type: Number,
     require:true
   },
+  sourceofincome:{
+    type: String,
+    require:true
+  },
   gender: String,
-  image: String,
-  
+
+  image:{
+    type:String,
+    default:path.join('images','noprofile.png')
+  },
   incomeCertificate:{
   type:String,
-  require:true
+  require:true,
+  default:path.join('images','noprofile.png')
   },
   feeProof:{
     type:String,
-    require:true
+    require:true,
+    default:path.join('images','noprofile.png')
   },
   address: String,
 
-  fundingRequied:{
+  fundingRequired:{
     type:Number,
     require:true
   },
  bankAcNo:{
     type:Number,
+    require:true
+  },
+  bankName:{
+    type:String,
     require:true
   },
   ifscCode:{

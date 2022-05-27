@@ -3,7 +3,7 @@ const router = express.Router();
 const {body} = require("express-validator");
 
 const authController = require("../controllers/studentauth");
-
+const isAuth = require("../middleware/isAuth")
 router.post("/signup", authController.signup);
 
 router.post("/otpVerification", [
@@ -28,5 +28,7 @@ router.put('/resetpass/verify/newpass', [
   body('email').isEmail().normalizeEmail(),
   body('newpass').trim().isLength({ min: 6 })
 ], authController.newpassword);
+
+router.put('/details',isAuth,authController.details);
 
 module.exports=router; 
