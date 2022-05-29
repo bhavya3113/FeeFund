@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose"); 
 const dotenv = require("dotenv");
 const authRoutes = require("./routes/studentauth");
+const donationRoutes = require("./routes/donation")
 const multer = require('multer');
 const path = require("path");
 
@@ -44,7 +45,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/auth',authRoutes);
-
+app.use('/donate',donationRoutes);
 
 app.use((error, req, res, next) => {
   // console.log(error);

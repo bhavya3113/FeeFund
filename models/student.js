@@ -61,6 +61,10 @@ const studentSchema = new schema({
     type:Number,
     require:true
   },
+  amountRaised:{
+    type:Number,
+    default:0
+  },
  bankAcNo:{
     type:Number,
     require:true

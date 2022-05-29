@@ -12,6 +12,7 @@ const sponsorSchema = new schema({
   mobileno:{
     type: Number,
   },
+  donation:[{
   amountdonated:{
     type:Number,
     require:true
@@ -20,6 +21,7 @@ const sponsorSchema = new schema({
     type:schema.Types.ObjectId,
     ref:"students"
   }
+}]
 })
 
 module.exports = mongoose.model("sponsors",sponsorSchema);

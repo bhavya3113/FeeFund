@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "server": "nodemon index.js" 
+    "server": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -22,9 +22,11 @@
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "dotenv": "^16.0.1",
     "email-regex": "^5.0.0",
     "express": "^4.18.1",
+    "express-asyncify": "^1.0.1",
     "express-validator": "^6.14.1",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.6.0",
@@ -33,6 +35,7 @@
     "nodemailer": "^6.7.5",
     "nodemailer-sendgrid-transport": "^0.2.0",
     "nodemon": "^2.0.16",
-    "otp-generator": "^4.0.0"
+    "otp-generator": "^4.0.0",
+    "razorpay": "^2.8.1"
   }
 }
