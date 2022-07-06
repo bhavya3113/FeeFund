@@ -271,7 +271,7 @@ exports.details = async (req, res, next) => {
         error.statusCode = 400;
         throw error;
       }
-     
+
       if(parseInt(fees)<parseInt(fundingRequired))
       {
         const error = new Error("Enter amount less than or equal to fees");
